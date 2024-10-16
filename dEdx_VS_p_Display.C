@@ -32,7 +32,7 @@ TF1 *Fit_MassParametrization(double mass, double p_start, double p_end, double C
   return fit;
 }
 
-void Display_TH2_Fit(TH2F *h2, TF1* fit_original_pion, TF1* fit_original_proton, TF1 *fit_pion, TF1 *fit_kaon, TF1 *fit_proton, TF1 *fit_deuteron, std::string filename_PDF, std::string filename_C, std::string filename_ROOT)
+void Display_TH2_Fit(TH2F *h2, TF1* fit_original_pion, TF1* fit_original_proton, TF1 *fit_pion, TF1 *fit_kaon, TF1 *fit_proton, TF1 *fit_deuteron, std::string filename_PDF, std::string filename_C, std::string filename_ROOT, std::string filename_PNG)
 {
   gROOT->SetBatch(kTRUE);
 
@@ -129,13 +129,14 @@ void Display_TH2_Fit(TH2F *h2, TF1* fit_original_pion, TF1* fit_original_proton,
   c->SaveAs(filename_PDF.c_str());
   c->SaveAs(filename_C.c_str());
   c->SaveAs(filename_ROOT.c_str());
+  c->SaveAs(filename_PNG.c_str());
 
   delete c;
 
   return;
 }
 
-void Display_TH2_NoFit(TH2F *h2, std::string filename_PDF, std::string filename_C, std::string filename_ROOT, bool charge)
+void Display_TH2_NoFit(TH2F *h2, std::string filename_PDF, std::string filename_C, std::string filename_ROOT, std::string filename_PNG, bool charge)
 {
   gROOT->SetBatch(kTRUE);
 
@@ -186,6 +187,7 @@ void Display_TH2_NoFit(TH2F *h2, std::string filename_PDF, std::string filename_
   c->SaveAs(filename_PDF.c_str());
   c->SaveAs(filename_C.c_str());
   c->SaveAs(filename_ROOT.c_str());
+  c->SaveAs(filename_PNG.c_str());
 
   delete c;
 
@@ -237,17 +239,17 @@ void dEdx_VS_p_Display()
     TF1* Fit_deuteron_BOTH = Fit_MassParametrization(1.87561, 0.90, 5, C_BOTH, K_BOTH);
 
     // Affichage
-    Display_TH2_NoFit(dEdX0stripVsP_charge_C, "Results/dEdX0stripVsP_charge_C.pdf", "dResults/EdX0stripVsP_charge_C.C", "Results/dEdX0stripVsP_charge_C.root", true);
-    Display_TH2_NoFit(dEdX0stripVsP_lowp_C, "Results/dEdX0stripVsP_lowp_C.pdf", "Results/dEdX0stripVsP_lowp_C.C", "Results/dEdX0stripVsP_lowp_C.root", false);
-    Display_TH2_Fit(dEdX0stripVsP_lowp_C, Fit_pion_original_Cperiod, Fit_proton_original_Cperiod, Fit_pion_Cperiod, Fit_kaon_Cperiod, Fit_proton_Cperiod, Fit_deuteron_Cperiod, "Results/dEdX0stripVsP_lowp_FIT_C.pdf", "Results/dEdX0stripVsP_lowp_FIT_C.C", "Results/dEdX0stripVsP_lowp_FIT_C.root");
+    Display_TH2_NoFit(dEdX0stripVsP_charge_C, "Results/dEdX0stripVsP_charge_C.pdf", "dResults/EdX0stripVsP_charge_C.C", "Results/dEdX0stripVsP_charge_C.root", "Results/dEdX0stripVsP_charge_C.png", true);
+    Display_TH2_NoFit(dEdX0stripVsP_lowp_C, "Results/dEdX0stripVsP_lowp_C.pdf", "Results/dEdX0stripVsP_lowp_C.C", "Results/dEdX0stripVsP_lowp_C.root", "Results/dEdX0stripVsP_lowp_C.png", false);
+    Display_TH2_Fit(dEdX0stripVsP_lowp_C, Fit_pion_original_Cperiod, Fit_proton_original_Cperiod, Fit_pion_Cperiod, Fit_kaon_Cperiod, Fit_proton_Cperiod, Fit_deuteron_Cperiod, "Results/dEdX0stripVsP_lowp_FIT_C.pdf", "Results/dEdX0stripVsP_lowp_FIT_C.C", "Results/dEdX0stripVsP_lowp_FIT_C.root", "Results/dEdX0stripVsP_lowp_FIT_C.png");
    
-    Display_TH2_NoFit(dEdX0stripVsP_charge_D, "Results/dEdX0stripVsP_charge_D.pdf", "Results/dEdX0stripVsP_charge_D.C", "Results/dEdX0stripVsP_charge_D.root", true);
-    Display_TH2_NoFit(dEdX0stripVsP_lowp_D, "Results/dEdX0stripVsP_lowp_D.pdf", "Results/dEdX0stripVsP_lowp_D.C", "Results/dEdX0stripVsP_lowp_C.root", false);
-    Display_TH2_Fit(dEdX0stripVsP_lowp_D, Fit_pion_original_Dperiod, Fit_proton_original_Dperiod, Fit_pion_Dperiod, Fit_kaon_Dperiod, Fit_proton_Dperiod, Fit_deuteron_Dperiod, "Results/dEdX0stripVsP_lowp_FIT_D.pdf", "Results/dEdX0stripVsP_lowp_FIT_D.C", "Results/dEdX0stripVsP_lowp_FIT_C.root");
+    Display_TH2_NoFit(dEdX0stripVsP_charge_D, "Results/dEdX0stripVsP_charge_D.pdf", "Results/dEdX0stripVsP_charge_D.C", "Results/dEdX0stripVsP_charge_D.root", "Results/dEdX0stripVsP_charge_D.png", true);
+    Display_TH2_NoFit(dEdX0stripVsP_lowp_D, "Results/dEdX0stripVsP_lowp_D.pdf", "Results/dEdX0stripVsP_lowp_D.C", "Results/dEdX0stripVsP_lowp_C.root", "Results/dEdX0stripVsP_lowp_C.png", false);
+    Display_TH2_Fit(dEdX0stripVsP_lowp_D, Fit_pion_original_Dperiod, Fit_proton_original_Dperiod, Fit_pion_Dperiod, Fit_kaon_Dperiod, Fit_proton_Dperiod, Fit_deuteron_Dperiod, "Results/dEdX0stripVsP_lowp_FIT_D.pdf", "Results/dEdX0stripVsP_lowp_FIT_D.C", "Results/dEdX0stripVsP_lowp_FIT_C.root", "Results/dEdX0stripVsP_lowp_FIT_C.png");
 
-    Display_TH2_NoFit(dEdX0stripVsP_charge_D, "Results/dEdX0stripVsP_charge_BOTH.pdf", "Results/dEdX0stripVsP_charge_BOTH.C", "Results/dEdX0stripVsP_charge_BOTH.root", true);
-    Display_TH2_NoFit(dEdX0stripVsP_lowp_BOTH, "Results/dEdX0stripVsP_lowp_BOTH.pdf", "Results/dEdX0stripVsP_lowp_BOTH.C", "Results/dEdX0stripVsP_lowp_BOTH.root", false);
-    Display_TH2_Fit(dEdX0stripVsP_lowp_BOTH, Fit_pion_original_BOTH, Fit_proton_original_BOTH, Fit_pion_BOTH, Fit_kaon_BOTH, Fit_proton_BOTH, Fit_deuteron_BOTH, "Results/dEdX0stripVsP_lowp_FIT_BOTH.pdf", "Results/dEdX0stripVsP_lowp_FIT_BOTH.C", "Results/dEdX0stripVsP_lowp_FIT_BOTH.root");
+    Display_TH2_NoFit(dEdX0stripVsP_charge_D, "Results/dEdX0stripVsP_charge_BOTH.pdf", "Results/dEdX0stripVsP_charge_BOTH.C", "Results/dEdX0stripVsP_charge_BOTH.root", "Results/dEdX0stripVsP_charge_BOTH.png", true);
+    Display_TH2_NoFit(dEdX0stripVsP_lowp_BOTH, "Results/dEdX0stripVsP_lowp_BOTH.pdf", "Results/dEdX0stripVsP_lowp_BOTH.C", "Results/dEdX0stripVsP_lowp_BOTH.root", "Results/dEdX0stripVsP_lowp_BOTH.png", false);
+    Display_TH2_Fit(dEdX0stripVsP_lowp_BOTH, Fit_pion_original_BOTH, Fit_proton_original_BOTH, Fit_pion_BOTH, Fit_kaon_BOTH, Fit_proton_BOTH, Fit_deuteron_BOTH, "Results/dEdX0stripVsP_lowp_FIT_BOTH.pdf", "Results/dEdX0stripVsP_lowp_FIT_BOTH.C", "Results/dEdX0stripVsP_lowp_FIT_BOTH.root", "Results/dEdX0stripVsP_lowp_FIT_BOTH.png");
 
 
     // Eta distribution and mass reconstruction

@@ -1,7 +1,7 @@
 void dEdX0stripVsP_charge_BOTH()
 {
 //=========Macro generated from canvas: c/c
-//=========  (Sat Sep 21 17:06:52 2024) by ROOT version 6.14/09
+//=========  (Wed Oct 16 15:35:30 2024) by ROOT version 6.14/09
    TCanvas *c = new TCanvas("c", "c",0,0,2500,1773);
    gStyle->SetOptStat(0);
    c->Range(-6.333333,-1.75,7,15.75);
